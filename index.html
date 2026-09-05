@@ -3,20 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BroCart - Your Ultimate Shopping Destination</title>
+    <title>BroCart-By M & B</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Hide scrollbars for clean mobile horizontal category pills */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Custom Smooth Animations & Keyframes */
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
@@ -33,19 +26,10 @@
             100% { transform: scale(1); }
         }
 
-        .animate-fade-in {
-            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .animate-fade-in { animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-pop:active { animation: popAnimation 0.25s ease-in-out; }
 
-        .animate-slide-up {
-            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-pop:active {
-            animation: popAnimation 0.25s ease-in-out;
-        }
-
-        /* Smooth Product Grid Stagger Transition */
         .product-card {
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -54,12 +38,7 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        /* Backdrop Blur Fade */
-        .backdrop-fade {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Cart item selected styling */
+        .backdrop-fade { transition: opacity 0.3s ease-in-out; }
         .cart-item-wrapper.selected {
             background-color: #f0f7ff;
             border-color: #3a86ff;
@@ -354,7 +333,7 @@
         </div>
     </div>
 
-    <!-- Full Screen Details & Image Preview Modal -->
+    <!-- Details & Image Preview Modal -->
     <div id="details-modal" class="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 hidden">
         <div class="bg-white rounded-none sm:rounded-3xl shadow-2xl w-full h-full sm:max-w-4xl sm:max-h-[92vh] overflow-hidden relative flex flex-col animate-fade-in">
             <div class="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-30 flex items-center justify-between pointer-events-none">
@@ -391,74 +370,74 @@
         const products = [
             { 
                 id: 1, 
-                name: "StyleCast x Revolt Men Wide Leg Mid-Rise Light Fade Jeans", 
-                category: "Fashion", 
-                price: 1799, 
-                originalPrice: 4149, 
-                rating: 4.4,
-                ratingCount: 38,
+                name: "Wireless Pro Headphones", 
+                category: "Electronics", 
+                price: 9999, 
+                originalPrice: 12999, 
+                rating: 4.8,
+                ratingCount: 142,
                 images: [
-                    "https://github.com/manseng/BroCart/blob/main/beltJeans.png?raw=true",
-                    "https://github.com/manseng/BroCart/blob/main/beltjeans2.png?raw=true",
+                    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=1000&auto=format&fit=crop&q=80"
                 ],
-                description: "Light shade, Light Fade Blue jeans, Clean Look, Non Strechable."
+                description: "Immersive high-definition sound with active noise cancellation and ultra-comfortable plush earcups designed for long sessions."
             },
             { 
                 id: 2, 
-                name: "Men Graphic Print Round Neck Cotton Blend Black T-Shirt", 
-                category: "Fashion", 
-                price: 350, 
-                originalPrice: 899, 
-                rating: 3.8,
-                ratingCount: 255,
+                name: "Minimalist Smartwatch", 
+                category: "Electronics", 
+                price: 14999, 
+                originalPrice: 18999, 
+                rating: 4.6,
+                ratingCount: 98,
                 images: [
                     "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=1000&auto=format&fit=crop&q=80"
                 ],
-                description: "Full Sleeve, Round Neck, Comfort Fit, Cotton blend, EYES-TSHIRT5-BLACK, Size: (M)."
+                description: "Track your fitness metrics, monitor heart rate, and read smartphone notifications in a sleek, water-resistant minimalist chassis."
             },
             { 
                 id: 3, 
-                name: "R Madrid 2011/12 Home Kit Ronaldo", 
+                name: "Streetwear Oversized Hoodie", 
                 category: "Fashion", 
-                price: 299, 
-                originalPrice: 449, 
-                rating: 4.4,
+                price: 2499, 
+                originalPrice: 3499, 
+                rating: 4.9,
                 ratingCount: 230,
                 images: [
                     "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1000&auto=format&fit=crop&q=80"
                 ],
-                description: "Polo Neck, Short Sleeve, Sleeve Styling: Regular, Pattern: Embroidered, Occassion: Casual."
+                description: "Premium heavy-cotton blend hoodie tailored for an effortless streetwear silhouette and exceptional warmth."
             },
             { 
                 id: 4, 
-                name: "Jack & Jones Embroidered Pure Cotton Baseball Cap", 
-                category: "Cap", 
-                price: 999, 
-                originalPrice: 1199, 
-                rating: 4.4,
-                ratingCount: 211,
+                name: "Hype Streetwear Sneakers", 
+                category: "Sneakers", 
+                price: 5999, 
+                originalPrice: 7999, 
+                rating: 4.7,
+                ratingCount: 175,
                 images: [
                     "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=1000&auto=format&fit=crop&q=80"
                 ],
-                description: "Green and brown embroidered baseball cap, has a visor."
+                description: "Bold colorways, responsive cushioning, and high durability make these kicks a must-have for sneakerheads."
             },
             { 
                 id: 5, 
-                name: "Men Colourblocked Pu Sneakers", 
-                category: "Sneakers, 
-                price: 1699, 
-                originalPrice: 3999, 
+                name: "Minimalist Metal Wallet", 
+                category: "Accessories", 
+                price: 1299, 
+                originalPrice: 1999, 
                 rating: 4.5,
-                ratingCount: 132,
+                ratingCount: 84,
                 images: [
                     "https://images.unsplash.com/photo-1627123424574-724758594e93?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=1000&auto=format&fit=crop&q=80"
                 ],
-                description: "A pair of Round Toe White Sneakers, has Regular Styling, Lace-ups detail Pu upper Cushioned footbed Textured and patterned outsole."
+                description: "RFID-blocking slim cardholder built from aerospace-grade aluminum for absolute pocket convenience."
             },
             { 
                 id: 6, 
@@ -470,7 +449,7 @@
                 ratingCount: 56,
                 images: [
                     "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1000&auto=format&fit=crop&q=80"
                 ],
                 description: "Durable polished keyring accessory built to withstand daily use with a clean urban aesthetic."
             },
@@ -484,7 +463,7 @@
                 ratingCount: 112,
                 images: [
                     "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1534215754734-18e55d13434b?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1534215754734-18e55d13434b?w=1000&auto=format&fit=crop&q=80"
                 ],
                 description: "Relaxed fit cotton twill baseball cap featuring an adjustable strap and clean embroidered detailing."
             },
@@ -498,7 +477,7 @@
                 ratingCount: 164,
                 images: [
                     "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=1000&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1608248597359-974b016334f5?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1608248597359-974b016334f5?w=1000&auto=format&fit=crop&q=80"
                 ],
                 description: "Nourishing facial serum packed with essential vitamins to keep your skin hydrated, clear, and glowing."
             }
@@ -1018,6 +997,7 @@
             window.open(`https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
         });
 
+        // Initialize display safely
         renderMobilePills();
         renderProducts();
     </script>
