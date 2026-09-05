@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BroCart-By M & B</title>
+    <title>BroCart - Your Ultimate Shopping Destination</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -333,7 +333,7 @@
         </div>
     </div>
 
-    <!-- Details & Image Preview Modal -->
+    <!-- Details & Image Preview Modal (Updated for Exact Myntra-style Preview) -->
     <div id="details-modal" class="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 hidden">
         <div class="bg-white rounded-none sm:rounded-3xl shadow-2xl w-full h-full sm:max-w-4xl sm:max-h-[92vh] overflow-hidden relative flex flex-col animate-fade-in">
             <div class="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-30 flex items-center justify-between pointer-events-none">
@@ -370,15 +370,16 @@
         const products = [
             { 
                 id: 1, 
-                name: "StyleCast X Revolt Men wide Leg Mid-Rise Light Fade Jeans", 
-                category: "Fashion", 
-                price: 1799, 
-                originalPrice: 4149, 
+                name: "Wireless Pro Headphones", 
+                category: "Electronics", 
+                price: 9999, 
+                originalPrice: 12999, 
                 rating: 4.8,
                 ratingCount: 142,
                 images: [
-                    "https://github.com/manseng/BroCart/blob/main/beltJeans.png?raw=true",
-                    "https://github.com/manseng/BroCart/blob/main/beltjeans2.png?raw=true"
+                    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=1000&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=1000&auto=format&fit=crop&q=80"
                 ],
                 description: "Immersive high-definition sound with active noise cancellation and ultra-comfortable plush earcups designed for long sessions."
             },
@@ -692,45 +693,64 @@
             btn.addEventListener('click', () => setCategory(btn.getAttribute('data-category')));
         });
 
+        // Exact Myntra-style Preview State & Handlers inside Details Modal
+        let activeGalleryImages = [];
+        let activeGalleryIndex = 0;
+
         function openDetails(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
             
-            const imgs = product.images;
-            let imageGalleryHTML = '';
+            activeGalleryImages = product.images;
+            activeGalleryIndex = 0;
 
-            if (imgs.length === 1) {
-                imageGalleryHTML = `
-                    <div class="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden shadow-md bg-gray-900 cursor-pointer group" onclick="openFullscreenView('${imgs[0]}', 0, ${JSON.stringify(imgs)})">
-                        <img src="${imgs[0]}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                            <span class="bg-black/60 text-white text-xs px-4 py-2 rounded-full font-semibold flex items-center space-x-2"><i class="fa-solid fa-expand"></i><span>Click to View Fullscreen</span></span>
-                        </div>
-                    </div>
-                `;
-            } else {
-                imageGalleryHTML = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        ${imgs.map((img, idx) => `
-                            <div class="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden shadow-md bg-gray-900 cursor-pointer group" onclick="openFullscreenView('${img}', ${idx}, ${JSON.stringify(imgs)})">
-                                <img src="${img}" alt="${product.name} ${idx+1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                                    <span class="bg-black/70 text-white text-xs px-3.5 py-1.5 rounded-full font-semibold flex items-center space-x-2"><i class="fa-solid fa-expand"></i><span>Zoom Fullscreen</span></span>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            }
+            updateDetailsModalView(product);
+            detailsModal.classList.remove('hidden');
+            openOverlay();
+        }
+
+        function updateDetailsModalView(product) {
+            const currentImg = activeGalleryImages[activeGalleryIndex];
 
             detailsContent.innerHTML = `
-                <div class="space-y-4">
+                <!-- Main Image Preview Container with Arrow Controls & Rating Badge -->
+                <div class="relative w-full aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden shadow-md bg-gray-900 group">
+                    <img id="main-preview-img" src="${currentImg}" alt="${product.name}" class="w-full h-full object-cover cursor-pointer" onclick="openFullscreenView('${currentImg}', ${activeGalleryIndex}, ${JSON.stringify(activeGalleryImages)})">
+                    
+                    <!-- Rating Badge Overlay (Exact Match to Image Reference) -->
+                    <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg flex items-center space-x-1.5 text-xs font-bold text-gray-900">
+                        <span>${product.rating}</span>
+                        <i class="fa-solid fa-star text-emerald-600 text-[11px]"></i>
+                        <span class="text-gray-300">|</span>
+                        <span class="text-gray-600 font-semibold">${product.ratingCount}</span>
+                    </div>
+
+                    <!-- Left / Right Navigation Arrows -->
+                    ${activeGalleryImages.length > 1 ? `
+                        <button onclick="switchPreviewImage(-1, ${product.id})" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button onclick="switchPreviewImage(1, ${product.id})" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    ` : ''}
+                </div>
+
+                <!-- Thumbnail Strip Bar (Exact Match to Reference App) -->
+                ${activeGalleryImages.length > 1 ? `
+                    <div class="flex space-x-3 overflow-x-auto no-scrollbar py-2">
+                        ${activeGalleryImages.map((img, idx) => `
+                            <button onclick="setPreviewImage(${idx}, ${product.id})" class="relative w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${idx === activeGalleryIndex ? 'border-indigo-600 shadow-md scale-105' : 'border-transparent opacity-70 hover:opacity-100'}">
+                                <img src="${img}" alt="Thumbnail ${idx+1}" class="w-full h-full object-cover">
+                            </button>
+                        `).join('')}
+                    </div>
+                ` : ''}
+
+                <!-- Product Info & Details -->
+                <div class="space-y-4 pt-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">${product.category}</span>
-                        <div class="flex items-center space-x-1 text-amber-500 text-xs font-bold">
-                            <i class="fa-solid fa-star"></i>
-                            <span>${product.rating} (${product.ratingCount} reviews)</span>
-                        </div>
                     </div>
                     <h3 class="text-2xl sm:text-3xl font-black text-gray-900">${product.name}</h3>
                     <div class="flex items-center space-x-3">
@@ -738,12 +758,6 @@
                         <span class="text-gray-400 line-through text-base">₹${product.originalPrice.toLocaleString('en-IN')}</span>
                         <span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-md">Save ₹${(product.originalPrice - product.price).toLocaleString('en-IN')}</span>
                     </div>
-                </div>
-                <div class="py-2">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Product Image Gallery (Click any image to view full screen)</h4>
-                    ${imageGalleryHTML}
-                </div>
-                <div class="space-y-4 pt-2 border-t">
                     <p class="text-gray-600 text-sm sm:text-base leading-relaxed">${product.description}</p>
                     <button onclick="addToCart(${product.id}); closeDetails();" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 active:scale-[0.98] animate-pop transition-all text-sm sm:text-base shadow-xl shadow-indigo-600/25 flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -751,8 +765,20 @@
                     </button>
                 </div>
             `;
-            detailsModal.classList.remove('hidden');
-            openOverlay();
+        }
+
+        function switchPreviewImage(direction, productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            activeGalleryIndex = (activeGalleryIndex + direction + activeGalleryImages.length) % activeGalleryImages.length;
+            updateDetailsModalView(product);
+        }
+
+        function setPreviewImage(index, productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            activeGalleryIndex = index;
+            updateDetailsModalView(product);
         }
 
         function closeDetails() {
