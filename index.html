@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BroCart-By M & B</title>
+    <title>BroCart - Your Ultimate Shopping Destination</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -27,12 +27,22 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes popAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.92); }
+            100% { transform: scale(1); }
+        }
+
         .animate-fade-in {
             animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .animate-slide-up {
             animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-pop:active {
+            animation: popAnimation 0.25s ease-in-out;
         }
 
         /* Smooth Product Grid Stagger Transition */
@@ -44,25 +54,26 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        /* Smooth Drawer transitions */
-        .drawer {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
         /* Backdrop Blur Fade */
         .backdrop-fade {
             transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Cart item selected styling */
+        .cart-item-wrapper.selected {
+            background-color: #f0f7ff;
+            border-color: #3a86ff;
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans selection:bg-indigo-500 selection:text-white">
 
-    <div id="toast" class="fixed bottom-5 right-5 z-[70] bg-gray-900 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2">
+    <div id="toast" class="fixed bottom-5 right-5 z-[80] bg-gray-900 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2">
         <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
         <span id="toast-msg">Link copied to clipboard!</span>
     </div>
 
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <a href="#home" class="flex items-center space-x-2.5 sm:space-x-3 group">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md group-hover:bg-indigo-700 group-hover:scale-105 transition-all duration-300">
@@ -94,10 +105,9 @@
     </header>
 
     <section id="home" class="relative bg-gradient-to-r from-gray-900 via-indigo-950 to-indigo-900 text-white overflow-hidden py-10 sm:py-20 lg:py-24">
-        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px] sm:[background-size:20px_20px]"></div>
+        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            
             <div class="space-y-4 sm:space-y-6 text-center lg:text-left animate-slide-up">
                 <div class="inline-flex items-center space-x-2 bg-indigo-600/30 text-indigo-300 text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full border border-indigo-500/30">
                     <i class="fa-solid fa-user-group text-[10px]"></i>
@@ -121,50 +131,29 @@
                         Our Story
                     </a>
                 </div>
-
-                <div class="pt-3 sm:pt-4 grid grid-cols-3 gap-2 sm:gap-4 border-t border-gray-800 text-center lg:text-left max-w-md mx-auto lg:mx-0">
-                    <div>
-                        <p class="text-indigo-400 font-black text-base sm:text-lg">100%</p>
-                        <p class="text-[11px] sm:text-xs text-gray-400">Handpicked Quality</p>
-                    </div>
-                    <div>
-                        <p class="text-indigo-400 font-black text-base sm:text-lg">Direct</p>
-                        <p class="text-[11px] sm:text-xs text-gray-400">WhatsApp Chat</p>
-                    </div>
-                    <div>
-                        <p class="text-indigo-400 font-black text-base sm:text-lg">Fast</p>
-                        <p class="text-[11px] sm:text-xs text-gray-400">Secure Shipping</p>
-                    </div>
-                </div>
             </div>
 
             <div class="relative flex justify-center mt-2 lg:mt-0 animate-fade-in">
                 <div class="w-full max-w-sm sm:max-w-md bg-white/5 backdrop-blur-lg border border-white/10 p-4 sm:p-6 rounded-3xl shadow-2xl relative overflow-hidden group">
                     <div class="absolute -right-12 -top-12 w-40 h-40 bg-indigo-500/20 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition duration-500"></div>
-                    
                     <div class="relative h-52 sm:h-64 rounded-2xl overflow-hidden shadow-inner">
                         <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80" alt="BroCart Featured" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-6">
                             <span class="bg-indigo-600 text-white text-[9px] sm:text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase w-max mb-1">M & B Signature Drop</span>
                             <h3 class="text-lg sm:text-xl font-bold text-white">Gadgets & Streetwear Essentials</h3>
-                            <p class="text-[11px] sm:text-xs text-gray-300 mt-0.5">Pack your cart and order in seconds.</p>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
     <main id="products-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-        
         <div class="block lg:hidden mb-6 overflow-x-auto no-scrollbar py-1">
-            <div id="mobile-pills-container" class="flex space-x-2 w-max">
-                </div>
+            <div id="mobile-pills-container" class="flex space-x-2 w-max"></div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
             <aside class="lg:col-span-1 space-y-6">
                 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative">
                     <div class="relative">
@@ -176,8 +165,7 @@
                             <span class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Recent Searches</span>
                             <button id="clear-history-btn" class="text-[11px] text-indigo-600 hover:text-indigo-800 font-semibold transition">Clear</button>
                         </div>
-                        <div id="recent-searches-list" class="max-h-48 overflow-y-auto divide-y divide-gray-50">
-                            </div>
+                        <div id="recent-searches-list" class="max-h-48 overflow-y-auto divide-y divide-gray-50"></div>
                     </div>
                 </div>
 
@@ -194,12 +182,6 @@
                         <li><button data-category="Beauty" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Beauty</button></li>
                     </ul>
                 </div>
-
-                <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border border-indigo-100 text-center hidden lg:block shadow-sm">
-                    <i class="fa-brands fa-whatsapp text-green-600 text-4xl mb-3 animate-bounce"></i>
-                    <h4 class="font-bold text-gray-900 mb-1">Fast WhatsApp Orders</h4>
-                    <p class="text-xs text-gray-600 mb-4">No registration hassles. Add items, submit your delivery address, and order instantly!</p>
-                </div>
             </aside>
 
             <section class="lg:col-span-3">
@@ -207,11 +189,8 @@
                     <h2 id="catalog-title" class="text-xl sm:text-3xl font-bold text-gray-900">All product</h2>
                     <span id="product-count" class="text-xs sm:text-sm text-gray-500 font-medium">Showing items</span>
                 </div>
-                
-                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
-                    </div>
+                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6"></div>
             </section>
-
         </div>
     </main>
 
@@ -219,7 +198,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center space-y-3 sm:space-y-4">
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">About BroCart</h2>
-                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Two Bros, one cart - fashion, gadgets and everyday essentials. BroCart was built to make online shopping effortless and personal. Instead of complicated checkout funnels, we connect you straight to us through WhatsApp. Browse our curated catalogs, pack your cart, and experience secure, direct communication for every purchase.</p>
+                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Two Bros, one cart - fashion, gadgets and everyday essentials. BroCart was built to make online shopping effortless and personal.</p>
             </div>
         </div>
     </section>
@@ -228,7 +207,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center space-y-3 sm:space-y-4">
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Need Help or Support?</h2>
-                <p class="text-sm sm:text-base text-gray-600">Have questions regarding shipping, order tracking, or product specs? We're available to assist you right away.</p>
                 <div class="pt-2">
                     <a href="https://wa.me/917086856971" target="_blank" class="inline-flex items-center space-x-2 bg-green-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-green-700 hover:scale-105 active:scale-95 transition-all duration-200 shadow-md text-sm sm:text-base">
                         <i class="fa-brands fa-whatsapp text-xl"></i>
@@ -241,30 +219,138 @@
 
     <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none backdrop-fade"></div>
 
-    <div id="wishlist-drawer" class="drawer fixed top-0 right-0 w-full sm:w-96 h-full bg-white shadow-2xl z-50 transform translate-x-full flex flex-col">
-        <div class="p-4 border-b flex items-center justify-between bg-pink-50">
-            <h3 class="text-lg font-bold text-pink-700"><i class="fa-solid fa-heart mr-2"></i> Your Wishlist</h3>
-            <button id="close-wishlist" class="text-gray-500 hover:text-gray-800 text-xl hover:rotate-90 transition duration-300"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div id="wishlist-items" class="flex-1 overflow-y-auto p-4 space-y-4">
-            <p class="text-gray-500 text-center py-8">Your wishlist is currently empty.</p>
+    <div id="wishlist-modal" class="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 hidden animate-fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col overflow-hidden relative border border-gray-100">
+            <div class="p-4 sm:p-6 bg-gradient-to-r from-pink-900 to-rose-950 text-white flex items-center justify-between shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-pink-600 rounded-xl flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-heart text-white text-sm sm:text-base"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold">Your Wishlist</h3>
+                        <p class="text-[11px] sm:text-xs text-pink-200">Items you have saved for later</p>
+                    </div>
+                </div>
+                <button id="close-wishlist-modal" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition duration-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div id="wishlist-items" class="p-5 sm:p-8 overflow-y-auto flex-1 space-y-4 bg-gray-50/50">
+                <p class="text-gray-500 text-center py-8">Your wishlist is currently empty.</p>
+            </div>
         </div>
     </div>
 
-    <div id="cart-drawer" class="drawer fixed top-0 right-0 w-full sm:w-96 h-full bg-white shadow-2xl z-50 transform translate-x-full flex flex-col">
-        <div class="p-4 border-b flex items-center justify-between bg-gray-100">
-            <h3 class="text-lg font-bold"><i class="fa-solid fa-cart-shopping mr-2"></i> Your Shopping Cart</h3>
-            <button id="close-cart" class="text-gray-500 hover:text-gray-800 text-xl hover:rotate-90 transition duration-300"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
-            <p class="text-gray-500 text-center py-8">Your cart is currently empty.</p>
-        </div>
-        <div class="p-4 border-t bg-gray-50">
-            <div class="flex justify-between font-bold text-base sm:text-lg mb-4">
-                <span>Total:</span>
-                <span id="cart-total">₹0.00</span>
+    <div id="cart-modal" class="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 hidden animate-fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col overflow-hidden relative border border-gray-100">
+            <div class="p-4 sm:p-6 bg-gradient-to-r from-gray-900 to-indigo-950 text-white flex items-center justify-between shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-cart-shopping text-white text-sm sm:text-base"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold">Shared Cart</h3>
+                        <p class="text-[11px] sm:text-xs text-indigo-200">Manage items and proceed to checkout</p>
+                    </div>
+                </div>
+                <button id="close-cart-modal" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition duration-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
             </div>
-            <button id="checkout-btn" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">Proceed to Checkout</button>
+
+            <div id="cart-batch-bar" class="px-5 py-3 bg-indigo-50/70 border-b flex items-center justify-between text-xs font-semibold text-indigo-900 hidden shrink-0">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="select-all-cart" class="w-4 h-4 accent-indigo-600 rounded">
+                    <span>Select All Cart Items</span>
+                </label>
+                <span id="selected-count-badge" class="bg-indigo-600 text-white px-2.5 py-0.5 rounded-full text-[10px]">0 selected</span>
+            </div>
+
+            <div class="p-5 sm:p-8 overflow-y-auto flex-1 space-y-3 bg-gray-50/50">
+                <div id="cart-items" class="space-y-3">
+                    <p class="text-gray-500 text-center py-8">Your cart is currently empty.</p>
+                </div>
+            </div>
+
+            <div class="p-4 sm:p-5 bg-white border-t border-gray-100 shrink-0 space-y-3">
+                <div class="flex justify-between font-bold text-base sm:text-lg">
+                    <span>Total:</span>
+                    <span id="cart-total">₹0.00</span>
+                </div>
+                <button id="checkout-btn" type="button" class="w-full bg-green-600 text-white font-bold py-3.5 rounded-xl hover:bg-green-700 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg shadow-green-600/25 text-sm sm:text-base">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Send Order via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="shipping-modal" class="fixed inset-0 z-[70] bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 hidden animate-fade-in">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col overflow-hidden relative border border-gray-100">
+            <div class="p-4 sm:p-6 bg-gradient-to-r from-gray-900 to-indigo-950 text-white flex items-center justify-between shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-truck-fast text-white text-sm sm:text-base"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold">Shipping Details</h3>
+                        <p class="text-[11px] sm:text-xs text-gray-300">Enter where we should send your order</p>
+                    </div>
+                </div>
+                <button id="close-shipping-modal" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition duration-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-8 overflow-y-auto flex-1 space-y-4 sm:space-y-5 bg-gray-50/50">
+                <form id="order-form" class="space-y-4 sm:space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" id="cust-name" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number *</label>
+                            <input type="tel" id="cust-phone" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="+91 9876543210">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Street Address *</label>
+                        <input type="text" id="cust-address" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="House No, Building Name, Street Name">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">City *</label>
+                            <input type="text" id="cust-city" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="City">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">District *</label>
+                            <input type="text" id="cust-district" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="District">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">State *</label>
+                            <input type="text" id="cust-state" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="State">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">PIN Code *</label>
+                            <input type="text" id="cust-pin" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="PIN Code">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="p-4 sm:p-5 bg-white border-t border-gray-100 shrink-0 flex items-center justify-end space-x-3">
+                <button type="button" id="cancel-shipping-btn" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">Cancel</button>
+                <button type="button" id="submit-order-btn" class="bg-green-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-green-700 active:scale-[0.98] transition-all text-xs sm:text-sm flex items-center space-x-2 shadow-lg shadow-green-600/25">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Confirm & Send Order</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -277,66 +363,18 @@
                 </button>
                 <button id="close-details" class="pointer-events-auto bg-white/90 backdrop-blur w-8 h-8 rounded-full text-gray-700 hover:text-gray-900 text-base shadow flex items-center justify-center hover:rotate-90 hover:scale-105 transition-all duration-300"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            
-            <div id="details-content" class="overflow-y-auto flex-1 p-4 sm:p-6 space-y-4 pt-12 sm:pt-14">
-                </div>
+            <div id="details-content" class="overflow-y-auto flex-1 p-4 sm:p-6 space-y-4 pt-12 sm:pt-14"></div>
         </div>
     </div>
 
-    <div id="fullscreen-modal" class="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center hidden p-2 sm:p-4 animate-fade-in">
+    <div id="fullscreen-modal" class="fixed inset-0 z-[80] bg-black/95 flex items-center justify-center hidden p-2 sm:p-4 animate-fade-in">
         <button id="close-fullscreen" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-white text-2xl sm:text-3xl hover:text-gray-300 z-20 p-2 bg-black/40 hover:scale-110 rounded-full transition duration-200"><i class="fa-solid fa-xmark"></i></button>
-        
         <button id="prev-image" class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/90 hover:scale-105 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-lg sm:text-xl transition duration-200 z-20"><i class="fa-solid fa-chevron-left"></i></button>
-        
         <div class="w-full max-w-4xl max-h-[80vh] flex items-center justify-center overflow-hidden relative px-10 sm:px-0">
             <img id="fullscreen-img" src="" alt="Fullscreen view" class="max-w-full max-h-[75vh] sm:max-h-[80vh] object-contain rounded-lg animate-fade-in">
         </div>
-
         <button id="next-image" class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/90 hover:scale-105 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-lg sm:text-xl transition duration-200 z-20"><i class="fa-solid fa-chevron-right"></i></button>
-        
         <div id="image-counter" class="absolute bottom-4 sm:bottom-6 text-white text-xs sm:text-sm bg-black/70 px-3 sm:px-4 py-1.5 rounded-full font-medium">1 / 3</div>
-    </div>
-
-    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-3 sm:p-4">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-4 sm:p-6 relative animate-fade-in">
-            <button id="close-checkout" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl hover:rotate-90 transition duration-300"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="text-xl sm:text-2xl font-bold mb-4 text-gray-900 border-b pb-2">Shipping Details</h3>
-            
-            <form id="order-form" class="space-y-3 sm:space-y-4">
-                <div>
-                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <input type="text" id="cust-name" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition" placeholder="John Doe">
-                </div>
-                <div>
-                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Street Address</label>
-                    <input type="text" id="cust-address" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition" placeholder="123 Main St, Apt 4B">
-                </div>
-                <div class="grid grid-cols-2 gap-3 sm:gap-4">
-                    <div>
-                        <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">City</label>
-                        <input type="text" id="cust-city" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition" placeholder="City Name">
-                    </div>
-                    <div>
-                        <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">District</label>
-                        <input type="text" id="cust-district" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition" placeholder="District">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3 sm:gap-4">
-                    <div>
-                        <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">State</label>
-                        <input type="text" id="cust-state" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition" placeholder="State">
-                    </div>
-                    <div>
-                        <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">PIN / Postal Code</label>
-                        <input type="text" id="cust-pin" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition" placeholder="PIN Code">
-                    </div>
-                </div>
-                <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 active:scale-[0.98] transition-all duration-200 flex items-center justify-center space-x-2 mt-4 sm:mt-6 text-sm sm:text-base shadow-lg shadow-green-600/20">
-                    <i class="fa-brands fa-whatsapp text-xl"></i>
-                    <span>Send Order via WhatsApp</span>
-                </button>
-            </form>
-        </div>
     </div>
 
     <footer class="bg-gray-900 text-white py-8 mt-12 sm:mt-16">
@@ -347,7 +385,6 @@
 
     <script>
         const YOUR_WHATSAPP_NUMBER = "917086856971";
-
         const categories = ["All product", "Fashion", "Electronics", "Sneakers", "Accessories", "Key chains", "Cap", "Beauty"];
 
         const products = [
@@ -376,8 +413,7 @@
                 ratingCount: 98,
                 images: [
                     "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop&q=60"
+                    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60"
                 ],
                 description: "Track your fitness metrics, monitor heart rate, and read smartphone notifications in a sleek, water-resistant minimalist chassis."
             },
@@ -391,8 +427,7 @@
                 ratingCount: 230,
                 images: [
                     "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&auto=format&fit=crop&q=60"
+                    "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=60"
                 ],
                 description: "Premium heavy-cotton blend hoodie tailored for an effortless streetwear silhouette and exceptional warmth."
             },
@@ -406,8 +441,7 @@
                 ratingCount: 175,
                 images: [
                     "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&auto=format&fit=crop&q=60"
+                    "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=500&auto=format&fit=crop&q=60"
                 ],
                 description: "Bold colorways, responsive cushioning, and high durability make these kicks a must-have for sneakerheads."
             },
@@ -420,8 +454,7 @@
                 rating: 4.5,
                 ratingCount: 84,
                 images: [
-                    "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=500&auto=format&fit=crop&q=60"
+                    "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=60"
                 ],
                 description: "RFID-blocking slim cardholder built from aerospace-grade aluminum for absolute pocket convenience."
             },
@@ -434,8 +467,7 @@
                 rating: 4.4,
                 ratingCount: 56,
                 images: [
-                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&auto=format&fit=crop&q=60"
+                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60"
                 ],
                 description: "Durable polished keyring accessory built to withstand daily use with a clean urban aesthetic."
             },
@@ -448,8 +480,7 @@
                 rating: 4.6,
                 ratingCount: 112,
                 images: [
-                    "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1534215754734-18e55d134346?w=500&auto=format&fit=crop&q=60"
+                    "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop&q=60"
                 ],
                 description: "Relaxed fit cotton twill baseball cap featuring an adjustable strap and clean embroidered detailing."
             },
@@ -462,8 +493,7 @@
                 rating: 4.8,
                 ratingCount: 164,
                 images: [
-                    "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&auto=format&fit=crop&q=60",
-                    "https://images.unsplash.com/photo-1608248597359-f5383a1523f0?w=500&auto=format&fit=crop&q=60"
+                    "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&auto=format&fit=crop&q=60"
                 ],
                 description: "Nourishing facial serum packed with essential vitamins to keep your skin hydrated, clear, and glowing."
             }
@@ -474,7 +504,6 @@
         let currentCategory = "All product";
         let searchQuery = "";
         let recentSearches = JSON.parse(localStorage.getItem('brocart_recent_searches')) || ["Headphones", "Hoodie", "Sneakers"];
-
         let activeFullscreenImages = [];
         let currentFullscreenIndex = 0;
 
@@ -490,16 +519,25 @@
         const productCount = document.getElementById('product-count');
 
         const cartBtn = document.getElementById('cart-btn');
-        const closeCartBtn = document.getElementById('close-cart');
-        const cartDrawer = document.getElementById('cart-drawer');
+        const closeCartModalBtn = document.getElementById('close-cart-modal');
+        const cartModal = document.getElementById('cart-modal');
         const cartCount = document.getElementById('cart-count');
         const cartItemsContainer = document.getElementById('cart-items');
         const cartTotal = document.getElementById('cart-total');
         const checkoutBtn = document.getElementById('checkout-btn');
+        const cartBatchBar = document.getElementById('cart-batch-bar');
+        const selectAllCartCheckbox = document.getElementById('select-all-cart');
+        const selectedCountBadge = document.getElementById('selected-count-badge');
+
+        const shippingModal = document.getElementById('shipping-modal');
+        const closeShippingModalBtn = document.getElementById('close-shipping-modal');
+        const cancelShippingBtn = document.getElementById('cancel-shipping-btn');
+        const submitOrderBtn = document.getElementById('submit-order-btn');
+        const orderForm = document.getElementById('order-form');
 
         const wishlistBtn = document.getElementById('wishlist-btn');
-        const closeWishlistBtn = document.getElementById('close-wishlist');
-        const wishlistDrawer = document.getElementById('wishlist-drawer');
+        const closeWishlistModalBtn = document.getElementById('close-wishlist-modal');
+        const wishlistModal = document.getElementById('wishlist-modal');
         const wishlistCount = document.getElementById('wishlist-count');
         const wishlistItemsContainer = document.getElementById('wishlist-items');
 
@@ -514,9 +552,6 @@
         const nextImageBtn = document.getElementById('next-image');
         const imageCounter = document.getElementById('image-counter');
 
-        const checkoutModal = document.getElementById('checkout-modal');
-        const closeCheckoutBtn = document.getElementById('close-checkout');
-        const orderForm = document.getElementById('order-form');
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toast-msg');
 
@@ -531,12 +566,9 @@
         function copyProductLink(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
-
             const dummyURL = window.location.origin + window.location.pathname + `#product-${product.id}`;
             navigator.clipboard.writeText(dummyURL).then(() => {
                 showToast(`Copied link for "${product.name}"!`);
-            }).catch(() => {
-                showToast("Failed to copy link.");
             });
         }
 
@@ -545,7 +577,6 @@
                 searchDropdown.classList.add('hidden');
                 return;
             }
-
             recentSearchesList.innerHTML = recentSearches.map(term => `
                 <button onclick="selectRecentSearch('${term}')" class="w-full text-left px-3 py-2 text-xs text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between group transition">
                     <span class="flex items-center space-x-2">
@@ -590,17 +621,6 @@
             renderProducts();
         });
 
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && searchQuery !== '') {
-                if (!recentSearches.includes(searchQuery)) {
-                    recentSearches.unshift(searchQuery);
-                    if (recentSearches.length > 5) recentSearches.pop();
-                    localStorage.setItem('brocart_recent_searches', JSON.stringify(recentSearches));
-                }
-                searchDropdown.classList.add('hidden');
-            }
-        });
-
         function renderMobilePills() {
             mobilePillsContainer.innerHTML = categories.map(cat => {
                 const isActive = currentCategory === cat;
@@ -615,7 +635,6 @@
         function setCategory(cat) {
             currentCategory = cat;
             catalogTitle.textContent = cat;
-
             categoryBtns.forEach(btn => {
                 if (btn.getAttribute('data-category') === cat) {
                     btn.classList.add('bg-indigo-50', 'text-indigo-600', 'font-semibold');
@@ -623,7 +642,6 @@
                     btn.classList.remove('bg-indigo-50', 'text-indigo-600', 'font-semibold');
                 }
             });
-
             renderMobilePills();
             renderProducts();
         }
@@ -631,17 +649,8 @@
         function shareOnWhatsApp(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
-
-            let shareText = `🔥 Check out this product on *BroCart*!\n\n`;
-            shareText += `📦 *${product.name}*\n`;
-            shareText += `🏷️ Category: ${product.category}\n`;
-            shareText += `⭐ Rating: ${product.rating} / 5 (${product.ratingCount} ratings)\n`;
-            shareText += `💰 Price: ₹${product.price.toLocaleString('en-IN')} *(MRP: ₹${product.originalPrice.toLocaleString('en-IN')})*\n\n`;
-            shareText += `📝 ${product.description}\n\n`;
-            shareText += `🔗 Order via BroCart WhatsApp!`;
-
-            const encodedURL = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-            window.open(encodedURL, '_blank');
+            let shareText = `🔥 Check out this product on *BroCart*!\n\n📦 *${product.name}*\n💰 Price: ₹${product.price.toLocaleString('en-IN')}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
         }
 
         function getFilteredProducts() {
@@ -655,7 +664,6 @@
         function renderProducts() {
             const filtered = getFilteredProducts();
             productCount.textContent = `Showing ${filtered.length} items`;
-
             if (filtered.length === 0) {
                 productGrid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500 animate-fade-in">No products found matching your criteria.</div>`;
                 return;
@@ -679,16 +687,9 @@
                         <div onclick="openDetails(${product.id})" class="cursor-pointer">
                             <div class="relative w-full h-36 sm:h-48 overflow-hidden bg-gray-100">
                                 <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
-                                ${product.images.length > 1 ? `<span class="absolute bottom-2 left-2 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2 py-0.5 rounded-md"><i class="fa-solid fa-images mr-1"></i> ${product.images.length} Photos</span>` : ''}
                             </div>
                             <div class="p-3 sm:p-4">
-                                <div class="flex items-center justify-between mb-1">
-                                    <span class="text-[10px] sm:text-xs font-semibold text-indigo-600 uppercase tracking-wide">${product.category}</span>
-                                    <div class="flex items-center space-x-1 text-amber-500 text-[10px] sm:text-xs font-semibold">
-                                        <i class="fa-solid fa-star"></i>
-                                        <span>${product.rating} <span class="text-gray-400 font-normal">(${product.ratingCount})</span></span>
-                                    </div>
-                                </div>
+                                <span class="text-[10px] sm:text-xs font-semibold text-indigo-600 uppercase tracking-wide">${product.category}</span>
                                 <h3 class="font-bold text-xs sm:text-base text-gray-900 mb-1 truncate">${product.name}</h3>
                                 <div class="flex items-center space-x-2">
                                     <span class="text-indigo-600 font-bold text-sm sm:text-base">₹${product.price.toLocaleString('en-IN')}</span>
@@ -697,7 +698,7 @@
                             </div>
                         </div>
                         <div class="p-3 sm:p-4 pt-0">
-                            <button onclick="addToCart(${product.id})" class="w-full bg-gray-900 text-white font-medium text-xs sm:text-sm py-2 rounded-lg hover:bg-indigo-600 active:scale-[0.98] transition-all duration-200">Add to Cart</button>
+                            <button onclick="addToCart(${product.id})" class="w-full bg-gray-900 text-white font-medium text-xs sm:text-sm py-2 rounded-lg hover:bg-indigo-600 active:scale-[0.98] animate-pop transition-all duration-200">Add to Cart</button>
                         </div>
                     </div>
                 `;
@@ -705,73 +706,23 @@
         }
 
         categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const cat = btn.getAttribute('data-category');
-                setCategory(cat);
-            });
+            btn.addEventListener('click', () => setCategory(btn.getAttribute('data-category')));
         });
 
         function openDetails(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
-
-            let imagesHTML = product.images.map((img, idx) => `
-                <div onclick="openFullscreen(${productId}, ${idx})" class="relative h-20 sm:h-24 rounded-lg overflow-hidden cursor-pointer group border-2 border-transparent hover:border-indigo-600 transition-all duration-200">
-                    <img src="${img}" alt="Product thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs">
-                        <i class="fa-solid fa-expand"></i>
-                    </div>
-                </div>
-            `).join('');
-
             detailsContent.innerHTML = `
-                <div>
-                    <div onclick="openFullscreen(${productId}, 0)" class="relative h-56 sm:h-72 rounded-xl overflow-hidden cursor-pointer group shadow-sm bg-gray-100">
-                        <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 ease-out">
-                        <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur text-white text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-lg flex items-center space-x-1.5">
-                            <i class="fa-solid fa-expand"></i>
-                            <span>View Fullscreen (${product.images.length})</span>
-                        </div>
-                    </div>
-                    ${product.images.length > 1 ? `
-                        <div class="mt-3">
-                            <p class="text-xs font-semibold text-gray-500 mb-2">Product Photos (${product.images.length}): Click any to view full screen</p>
-                            <div class="grid grid-cols-3 gap-2">
-                                ${imagesHTML}
-                            </div>
-                        </div>
-                    ` : ''}
+                <div class="relative h-56 sm:h-72 rounded-xl overflow-hidden cursor-pointer shadow-sm bg-gray-100">
+                    <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover">
                 </div>
-                <div class="space-y-3 sm:space-y-4 pt-1">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wide">${product.category}</span>
-                                <span class="text-gray-300">•</span>
-                                <div class="flex items-center space-x-1 text-amber-500 text-xs font-semibold">
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>${product.rating} <span class="text-gray-400 font-normal">(${product.ratingCount} ratings)</span></span>
-                                </div>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mt-1">${product.name}</h3>
-                            <div class="flex items-center space-x-3 mt-1.5">
-                                <span class="text-indigo-600 font-bold text-base sm:text-lg">₹${product.price.toLocaleString('en-IN')}</span>
-                                <span class="text-gray-400 line-through text-xs sm:text-sm">₹${product.originalPrice.toLocaleString('en-IN')}</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-1.5">
-                            <button onclick="copyProductLink(${product.id})" class="bg-gray-100 text-gray-700 border border-gray-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 hover:bg-gray-200 transition" title="Copy Link">
-                                <i class="fa-solid fa-link"></i>
-                                <span class="hidden sm:inline">Copy</span>
-                            </button>
-                            <button onclick="shareOnWhatsApp(${product.id})" class="bg-green-50 text-green-600 border border-green-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 hover:bg-green-100 transition">
-                                <i class="fa-brands fa-whatsapp text-base"></i>
-                                <span>Share</span>
-                            </button>
-                        </div>
+                <div class="space-y-3 pt-1">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900">${product.name}</h3>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-indigo-600 font-bold text-base sm:text-lg">₹${product.price.toLocaleString('en-IN')}</span>
                     </div>
                     <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">${product.description}</p>
-                    <button onclick="addToCart(${product.id}); closeDetails();" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 active:scale-[0.98] transition-all duration-200 text-sm sm:text-base">Add to Cart</button>
+                    <button onclick="addToCart(${product.id}); closeDetails();" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 animate-pop transition-all text-sm sm:text-base">Add to Cart</button>
                 </div>
             `;
             detailsModal.classList.remove('hidden');
@@ -785,47 +736,9 @@
 
         closeDetailsBtn.addEventListener('click', closeDetails);
 
-        function openFullscreen(productId, imageIndex) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            activeFullscreenImages = product.images;
-            currentFullscreenIndex = imageIndex;
-            updateFullscreenView();
-            fullscreenModal.classList.remove('hidden');
-        }
-
-        function updateFullscreenView() {
-            fullscreenImg.src = activeFullscreenImages[currentFullscreenIndex];
-            imageCounter.textContent = `${currentFullscreenIndex + 1} / ${activeFullscreenImages.length}`;
-            
-            if (activeFullscreenImages.length <= 1) {
-                prevImageBtn.classList.add('hidden');
-                nextImageBtn.classList.add('hidden');
-            } else {
-                prevImageBtn.classList.remove('hidden');
-                nextImageBtn.classList.remove('hidden');
-            }
-        }
-
-        prevImageBtn.addEventListener('click', () => {
-            currentFullscreenIndex = (currentFullscreenIndex - 1 + activeFullscreenImages.length) % activeFullscreenImages.length;
-            updateFullscreenView();
-        });
-
-        nextImageBtn.addEventListener('click', () => {
-            currentFullscreenIndex = (currentFullscreenIndex + 1) % activeFullscreenImages.length;
-            updateFullscreenView();
-        });
-
-        closeFullscreenBtn.addEventListener('click', () => {
-            fullscreenModal.classList.add('hidden');
-        });
-
         function toggleWishlist(productId) {
             const product = products.find(p => p.id === productId);
             const index = wishlist.findIndex(item => item.id === productId);
-
             if (index > -1) {
                 wishlist.splice(index, 1);
             } else {
@@ -847,19 +760,23 @@
                 wishlistItemsContainer.innerHTML = `<p class="text-gray-500 text-center py-8">Your wishlist is currently empty.</p>`;
                 return;
             }
-
             wishlistItemsContainer.innerHTML = wishlist.map(item => `
-                <div class="flex items-center justify-between border-b pb-4 animate-fade-in">
+                <div class="flex items-center justify-between bg-white border border-gray-100 rounded-xl p-3 sm:p-4 shadow-sm animate-fade-in">
                     <div class="flex items-center space-x-3">
-                        <img src="${item.images[0]}" alt="${item.name}" class="w-12 h-12 object-cover rounded">
+                        <img src="${item.images[0]}" alt="${item.name}" class="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-xl shadow-inner">
                         <div>
-                            <h4 class="font-semibold text-sm">${item.name}</h4>
-                            <p class="text-xs text-indigo-600 font-semibold">₹${item.price.toLocaleString('en-IN')}</p>
+                            <h4 class="font-semibold text-xs sm:text-sm text-gray-900">${item.name}</h4>
+                            <p class="text-xs text-indigo-600 font-bold">₹${item.price.toLocaleString('en-IN')}</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <button onclick="moveToCart(${item.id})" class="text-indigo-600 hover:text-indigo-800 text-sm bg-indigo-50 px-2 py-1 rounded transition" title="Move to Cart"><i class="fa-solid fa-cart-plus"></i></button>
-                        <button onclick="removeFromWishlist(${item.id})" class="text-red-500 hover:text-red-700 transition"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="moveToCart(${item.id})" class="text-indigo-600 hover:text-indigo-800 text-xs sm:text-sm bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-xl font-semibold animate-pop transition flex items-center space-x-1.5">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span class="hidden sm:inline">Move to Cart</span>
+                        </button>
+                        <button onclick="removeFromWishlist(${item.id})" class="text-red-500 hover:text-red-700 p-2 transition" title="Remove">
+                            <i class="fa-solid fa-trash text-sm"></i>
+                        </button>
                     </div>
                 </div>
             `).join('');
@@ -873,14 +790,13 @@
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             const cartItem = cart.find(item => item.id === productId);
-
             if (cartItem) {
                 cartItem.quantity += 1;
             } else {
-                cart.push({ ...product, quantity: 1 });
+                cart.push({ ...product, quantity: 1, selected: true });
             }
             updateCartUI();
-            openCart();
+            openCartModal();
         }
 
         function removeFromCart(productId) {
@@ -888,29 +804,58 @@
             updateCartUI();
         }
 
+        function toggleCartItemSelection(productId) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.selected = !item.selected;
+                updateCartUI();
+            }
+        }
+
+        selectAllCartCheckbox.addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            cart.forEach(item => item.selected = isChecked);
+            updateCartUI();
+        });
+
         function updateCartUI() {
             const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const selectedCount = cart.filter(item => item.selected).length;
 
             cartCount.textContent = totalCount;
             cartTotal.textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
-            checkoutBtn.disabled = cart.length === 0;
+            checkoutBtn.disabled = cart.length === 0 || selectedCount === 0;
 
             if (cart.length === 0) {
+                cartBatchBar.classList.add('hidden');
                 cartItemsContainer.innerHTML = `<p class="text-gray-500 text-center py-8">Your cart is currently empty.</p>`;
                 return;
             }
 
+            cartBatchBar.classList.remove('hidden');
+            selectAllCartCheckbox.checked = cart.length > 0 && cart.every(item => item.selected);
+            selectedCountBadge.textContent = `${selectedCount} selected`;
+
             cartItemsContainer.innerHTML = cart.map(item => `
-                <div class="flex items-center justify-between border-b pb-4 animate-fade-in">
+                <div class="cart-item-wrapper flex items-center justify-between border rounded-xl p-3 sm:p-4 transition-all duration-200 animate-fade-in ${item.selected ? 'selected' : 'bg-white border-gray-100'}">
                     <div class="flex items-center space-x-3">
-                        <img src="${item.images[0]}" alt="${item.name}" class="w-12 h-12 object-cover rounded">
+                        <input type="checkbox" ${item.selected ? 'checked' : ''} onchange="toggleCartItemSelection(${item.id})" class="w-4 h-4 accent-indigo-600 rounded cursor-pointer animate-pop">
+                        <img src="${item.images[0]}" alt="${item.name}" class="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-xl shadow-inner">
                         <div>
-                            <h4 class="font-semibold text-sm">${item.name}</h4>
-                            <p class="text-xs text-gray-500">₹${item.price.toLocaleString('en-IN')} x ${item.quantity}</p>
+                            <h4 class="font-semibold text-xs sm:text-sm text-gray-900">${item.name}</h4>
+                            <p class="text-xs text-indigo-600 font-bold">₹${item.price.toLocaleString('en-IN')} x ${item.quantity}</p>
                         </div>
                     </div>
-                    <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 transition"><i class="fa-solid fa-trash"></i></button>
+                    
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleWishlist(${item.id})" class="p-2 text-pink-600 bg-pink-50 hover:bg-pink-100 rounded-xl text-xs animate-pop transition" title="Add/Remove Wishlist">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                        <button onclick="removeFromCart(${item.id})" class="p-2 text-red-500 hover:text-red-700 transition" title="Remove">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -920,85 +865,87 @@
         }
 
         function checkCloseOverlay() {
-            if (cartDrawer.classList.contains('translate-x-full') && wishlistDrawer.classList.contains('translate-x-full') && detailsModal.classList.contains('hidden') && checkoutModal.classList.contains('hidden') && fullscreenModal.classList.contains('hidden')) {
+            if (cartModal.classList.contains('hidden') && wishlistModal.classList.contains('hidden') && detailsModal.classList.contains('hidden') && fullscreenModal.classList.contains('hidden') && shippingModal.classList.contains('hidden')) {
                 overlay.classList.add('opacity-0', 'pointer-events-none');
             }
         }
 
-        function openCart() {
-            cartDrawer.classList.remove('translate-x-full');
+        function openCartModal() {
+            cartModal.classList.remove('hidden');
             openOverlay();
         }
 
-        function closeCart() {
-            cartDrawer.classList.add('translate-x-full');
+        function closeCartModal() {
+            cartModal.classList.add('hidden');
             checkCloseOverlay();
         }
 
-        function openWishlist() {
-            wishlistDrawer.classList.remove('translate-x-full');
+        function openWishlistModal() {
+            wishlistModal.classList.remove('hidden');
             openOverlay();
         }
 
-        function closeWishlist() {
-            wishlistDrawer.classList.add('translate-x-full');
+        function closeWishlistModal() {
+            wishlistModal.classList.add('hidden');
             checkCloseOverlay();
         }
 
-        cartBtn.addEventListener('click', openCart);
-        closeCartBtn.addEventListener('click', closeCart);
-        
-        wishlistBtn.addEventListener('click', openWishlist);
-        closeWishlistBtn.addEventListener('click', closeWishlist);
+        cartBtn.addEventListener('click', openCartModal);
+        closeCartModalBtn.addEventListener('click', closeCartModal);
+        wishlistBtn.addEventListener('click', openWishlistModal);
+        closeWishlistModalBtn.addEventListener('click', closeWishlistModal);
 
         overlay.addEventListener('click', () => {
-            closeCart();
-            closeWishlist();
+            closeCartModal();
+            closeWishlistModal();
             closeDetails();
+            shippingModal.classList.add('hidden');
             fullscreenModal.classList.add('hidden');
-            checkoutModal.classList.add('hidden');
             overlay.classList.add('opacity-0', 'pointer-events-none');
         });
 
+        // When user clicks "Send Order via WhatsApp", open the fullscreen shipping modal
         checkoutBtn.addEventListener('click', () => {
-            closeCart();
-            checkoutModal.classList.remove('hidden');
+            const selectedCount = cart.filter(item => item.selected).length;
+            if (cart.length === 0 || selectedCount === 0) {
+                showToast("Please select items to checkout!");
+                return;
+            }
+            closeCartModal();
+            shippingModal.classList.remove('hidden');
             openOverlay();
         });
 
-        closeCheckoutBtn.addEventListener('click', () => {
-            checkoutModal.classList.add('hidden');
+        function closeShippingModal() {
+            shippingModal.classList.add('hidden');
             checkCloseOverlay();
-        });
+        }
 
-        orderForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        closeShippingModalBtn.addEventListener('click', closeShippingModal);
+        cancelShippingBtn.addEventListener('click', closeShippingModal);
 
-            const fullName = document.getElementById('cust-name').value;
-            const address = document.getElementById('cust-address').value;
-            const city = document.getElementById('cust-city').value;
-            const district = document.getElementById('cust-district').value;
-            const state = document.getElementById('cust-state').value;
-            const pin = document.getElementById('cust-pin').value;
+        // When user confirms shipping details, submit order via WhatsApp
+        submitOrderBtn.addEventListener('click', () => {
+            const fullName = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const city = document.getElementById('cust-city').value.trim();
+            const district = document.getElementById('cust-district').value.trim();
+            const state = document.getElementById('cust-state').value.trim();
+            const pin = document.getElementById('cust-pin').value.trim();
 
-            let itemsText = cart.map(item => `- ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString('en-IN')}`).join('\n');
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            if (!fullName || !phone || !address || !city || !district || !state || !pin) {
+                showToast("Please fill in all shipping details!");
+                orderForm.reportValidity();
+                return;
+            }
 
-            let message = `🛍️ *NEW ORDER PLACED - BroCart* 🛍️\n\n`;
-            message += `*Customer Details:*\n`;
-            message += `• Name: ${fullName}\n`;
-            message += `• Address: ${address}\n`;
-            message += `• City: ${city}\n`;
-            message += `• District: ${district}\n`;
-            message += `• State: ${state}\n`;
-            message += `• PIN Code: ${pin}\n\n`;
-            message += `*Order Items:*\n${itemsText}\n\n`;
-            message += `*Total Amount:* ₹${totalPrice.toLocaleString('en-IN')}`;
+            const selectedCartItems = cart.filter(item => item.selected);
+            let itemsText = selectedCartItems.map(item => `- ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString('en-IN')}`).join('\n');
+            const totalPrice = selectedCartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodedMessage}`;
-            
-            window.open(whatsappURL, '_blank');
+            let message = `🛍️ *NEW ORDER PLACED - BroCart* 🛍️\n\n*Customer Details:*\n• Name: ${fullName}\n• Phone: ${phone}\n• Address: ${address}, ${city}, ${district}, ${state} - ${pin}\n\n*Selected Order Items:*\n${itemsText}\n\n*Total Amount:* ₹${totalPrice.toLocaleString('en-IN')}`;
+            window.open(`https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
         });
 
         renderMobilePills();
