@@ -43,6 +43,14 @@
             background-color: #f0f7ff;
             border-color: #3a86ff;
         }
+
+        .zoomable-preview {
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+        .zoomable-preview:hover {
+            opacity: 0.95;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans selection:bg-indigo-500 selection:text-white">
@@ -83,7 +91,7 @@
         </div>
     </header>
 
-    <section id="home" class="relative bg-gradient-to-r from-gray-900 via-indigo-950 to-indigo-900 text-white overflow-hidden py-10 sm:py-20 lg:py-24">
+    <section id="home" class="relative bg-gradient-to-r from-gray-900 via-indigo-950 to-indigo-900 text-white overflow-hidden py-12 sm:py-20 lg:py-24">
         <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -136,10 +144,10 @@
             <aside class="lg:col-span-1 space-y-6">
                 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative">
                     <div class="relative">
-                        <input type="text" id="search-input" placeholder="Search products..." autocomplete="off" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition-all duration-200">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400"></i>
+                        <input type="text" id="search-input" placeholder="Search products..." autocomplete="off" class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition-all duration-200">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400"></i>
                     </div>
-                    <div id="search-dropdown" class="absolute left-0 right-0 top-full mt-1.5 bg-white border border-gray-100 rounded-xl shadow-xl z-30 hidden overflow-hidden animate-fade-in">
+                    <div id="search-dropdown" class="absolute left-0 right-0 top-full mt-1.5 bg-white border border-gray-100 rounded-xl shadow-xl z-35 hidden overflow-hidden animate-fade-in">
                         <div class="px-3 py-2 bg-gray-50 border-b flex items-center justify-between">
                             <span class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Recent Searches</span>
                             <button id="clear-history-btn" class="text-[11px] text-indigo-600 hover:text-indigo-800 font-semibold transition">Clear</button>
@@ -148,17 +156,17 @@
                     </div>
                 </div>
 
-                <div class="hidden lg:block bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="hidden lg:block bg-white p-6 rounded-2xl shadow-sm border border-gray-100 sticky top-28">
                     <h3 class="font-bold text-lg text-gray-900 mb-4 pb-2 border-b">Catalog Categories</h3>
                     <ul id="category-list" class="space-y-1 text-sm font-medium text-gray-600">
-                        <li><button data-category="All product" class="category-btn w-full text-left px-3 py-2 rounded-lg bg-indigo-50 text-indigo-600 font-semibold transition-all duration-200">All product</button></li>
-                        <li><button data-category="Fashion" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Fashion</button></li>
-                        <li><button data-category="Electronics" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Electronics</button></li>
-                        <li><button data-category="Sneakers" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Sneakers</button></li>
-                        <li><button data-category="Accessories" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Accessories</button></li>
-                        <li><button data-category="Key chains" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Key chains</button></li>
-                        <li><button data-category="Cap" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Cap</button></li>
-                        <li><button data-category="Beauty" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Beauty</button></li>
+                        <li><button data-category="All product" class="category-btn w-full text-left px-3 py-2.5 rounded-lg bg-indigo-50 text-indigo-600 font-semibold transition-all duration-200">All product</button></li>
+                        <li><button data-category="Fashion" class="category-btn w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Fashion</button></li>
+                        <li><button data-category="Electronics" class="category-btn w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Electronics</button></li>
+                        <li><button data-category="Sneakers" class="category-btn w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Sneakers</button></li>
+                        <li><button data-category="Accessories" class="category-btn w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Accessories</button></li>
+                        <li><button data-category="Key chains" class="category-btn w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Key chains</button></li>
+                        <li><button data-category="Cap" class="category-btn w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Cap</button></li>
+                        <li><button data-category="Beauty" class="category-btn w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200">Beauty</button></li>
                     </ul>
                 </div>
             </aside>
@@ -168,7 +176,7 @@
                     <h2 id="catalog-title" class="text-xl sm:text-3xl font-bold text-gray-900">All product</h2>
                     <span id="product-count" class="text-xs sm:text-sm text-gray-500 font-medium">Showing items</span>
                 </div>
-                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6"></div>
+                <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6"></div>
             </section>
         </div>
     </main>
@@ -265,49 +273,53 @@
     </div>
 
     <div id="shipping-modal" class="fixed inset-0 z-[70] bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 hidden animate-fade-in">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col overflow-hidden relative border border-gray-100">
-            <div class="p-4 sm:p-5 bg-gradient-to-r from-gray-900 to-indigo-950 text-white flex items-center justify-between shrink-0">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col overflow-hidden relative border border-gray-100">
+            <div class="p-4 sm:p-6 bg-gradient-to-r from-gray-900 to-indigo-950 text-white flex items-center justify-between shrink-0">
                 <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-                        <i class="fa-solid fa-truck-fast text-white text-sm"></i>
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-truck-fast text-white text-sm sm:text-base"></i>
                     </div>
                     <div>
-                        <h3 class="text-base font-bold">Shipping Details</h3>
-                        <p class="text-[11px] text-gray-300">Enter where we should send your order</p>
+                        <h3 class="text-base sm:text-lg font-bold">Shipping Details</h3>
+                        <p class="text-[11px] sm:text-xs text-gray-300">Enter where we should send your order</p>
                     </div>
                 </div>
-                <button id="close-shipping-modal" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition duration-200">
+                <button id="close-shipping-modal" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition duration-200">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
-            <div class="p-4 sm:p-6 overflow-y-auto overscroll-contain flex-1 space-y-3.5 bg-gray-50/50 max-h-[calc(92vh-130px)]">
-                <form id="order-form" class="space-y-3.5">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Full Name *</label>
-                        <input type="text" id="cust-name" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="John Doe">
+            <div class="p-5 sm:p-8 overflow-y-auto flex-1 space-y-4 sm:space-y-5 bg-gray-50/50">
+                <form id="order-form" class="space-y-4 sm:space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" id="cust-name" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number *</label>
+                            <input type="tel" id="cust-phone" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="+91 9876543210">
+                        </div>
                     </div>
+
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number *</label>
-                        <input type="tel" id="cust-phone" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition" placeholder="+91 9876543210">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Delivery Address *</label>
-                        <textarea id="cust-address" rows="3" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition resize-none" placeholder="House/Locality, City, District, State, PIN"></textarea>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Delivery Address (Street, City, District, State, PIN) *</label>
+                        <textarea id="cust-address-full" rows="3" required class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-xs sm:text-sm transition resize-none" placeholder="House No, Street, City, District, State - PIN Code"></textarea>
                     </div>
                 </form>
             </div>
 
-            <div class="p-4 bg-white border-t border-gray-100 shrink-0 flex items-center justify-end space-x-3">
-                <button type="button" id="cancel-shipping-btn" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">Cancel</button>
-                <button type="button" id="submit-order-btn" onclick="const name=document.getElementById('cust-name').value.trim();const phone=document.getElementById('cust-phone').value.trim();const address=document.getElementById('cust-address').value.trim();if(name&&phone&&address){let itemsText='• No items specified';let totalText='₹0';if(typeof cart !== 'undefined' && cart.length > 0){itemsText=cart.map(item => `• ${item.name} (Qty: ${item.quantity || 1}) - ₹${item.price}`).join('\n');const total = cart.reduce((sum, item) => sum + (parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) * (item.quantity || 1)), 0);totalText=`₹${total.toLocaleString('en-IN')}`;}const rawMessage=`🛍️ NEW ORDER PLACED - BroCart 🛍️\n\nCustomer Details:\n• Name: ${name}\n• Phone: ${phone}\n• Address: ${address}\n\nSelected Order Items:\n${itemsText}\n\nTotal Amount: ${totalText}`;window.open(`https://wa.me/917086856971?text=${encodeURIComponent(rawMessage)}`, '_blank');}else{document.getElementById('order-form').reportValidity();}" class="bg-green-600 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-green-700 active:scale-[0.98] transition-all text-xs sm:text-sm flex items-center space-x-2 shadow-lg shadow-green-600/25">
+            <div class="p-4 sm:p-5 bg-white border-t border-gray-100 shrink-0 flex items-center justify-end space-x-3">
+                <button type="button" id="cancel-shipping-btn" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">Cancel</button>
+                <button type="button" id="submit-order-btn" class="bg-green-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-green-700 active:scale-[0.98] transition-all text-xs sm:text-sm flex items-center space-x-2 shadow-lg shadow-green-600/25">
                     <i class="fa-brands fa-whatsapp text-base"></i>
                     <span>Confirm & Send Order</span>
                 </button>
             </div>
         </div>
     </div>
-    <!-- Details & Image Preview Modal (Updated for Exact Myntra-style Preview) -->
+
+    <!-- Product Details & Image Preview Modal -->
     <div id="details-modal" class="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 hidden">
         <div class="bg-white rounded-none sm:rounded-3xl shadow-2xl w-full h-full sm:max-w-4xl sm:max-h-[92vh] overflow-hidden relative flex flex-col animate-fade-in">
             <div class="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-30 flex items-center justify-between pointer-events-none">
@@ -321,14 +333,12 @@
         </div>
     </div>
 
-    <div id="fullscreen-modal" class="fixed inset-0 z-[80] bg-black/95 flex items-center justify-center hidden p-2 sm:p-4 animate-fade-in">
-        <button id="close-fullscreen" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-white text-2xl sm:text-3xl hover:text-gray-300 z-20 p-2 bg-black/40 hover:scale-110 rounded-full transition duration-200"><i class="fa-solid fa-xmark"></i></button>
-        <button id="prev-image" class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/90 hover:scale-105 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-lg sm:text-xl transition duration-200 z-20"><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="w-full max-w-5xl max-h-[85vh] flex items-center justify-center overflow-hidden relative px-10 sm:px-0">
-            <img id="fullscreen-img" src="" alt="Fullscreen view" class="max-w-full max-h-[80vh] sm:max-h-[85vh] object-contain rounded-lg shadow-2xl animate-fade-in">
+    <!-- Click-to-Zoom Image Modal Overlay -->
+    <div id="zoom-modal" class="fixed inset-0 z-[90] bg-black/90 backdrop-blur-sm flex items-center justify-center hidden p-2 sm:p-4 animate-fade-in">
+        <button id="close-zoom" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-white text-2xl sm:text-3xl hover:text-gray-300 z-20 p-2 bg-black/40 hover:scale-110 rounded-full transition duration-200"><i class="fa-solid fa-xmark"></i></button>
+        <div class="w-full max-w-5xl max-h-[90vh] flex items-center justify-center overflow-hidden relative">
+            <img id="zoomed-image-element" src="" alt="Zoomed view" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl animate-fade-in">
         </div>
-        <button id="next-image" class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/90 hover:scale-105 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-lg sm:text-xl transition duration-200 z-20"><i class="fa-solid fa-chevron-right"></i></button>
-        <div id="image-counter" class="absolute bottom-4 sm:bottom-6 text-white text-xs sm:text-sm bg-black/70 px-4 py-1.5 rounded-full font-medium">1 / 3</div>
     </div>
 
     <footer class="bg-gray-900 text-white py-8 mt-12 sm:mt-16">
@@ -455,20 +465,6 @@
                     "https://github.com/manseng/BroCart/blob/main/aven2.png?raw=true"
                 ],
                 description: "Material(METAL)."
-            },
-            { 
-                id: 9, 
-                name: "StyleCast X Revolt Men Wide Leg Mid-Rise Light Fade Jeans", 
-                category: "Fashion", 
-                price: 1849, 
-                originalPrice: 4149, 
-                rating: 4.1,
-                ratingCount: 38,
-                images: [
-                    "https://github.com/manseng/BroCart/blob/main/beltJeans.png?raw=true",
-                    "https://github.com/manseng/BroCart/blob/main/beltjeans2.png?raw=true"
-                ],
-                description: "Light shade, Light fade Blue Jeans, Wide Leg, Mid-Rise, Clean Look, Non-Strechable."
             }
         ];
 
@@ -477,8 +473,6 @@
         let currentCategory = "All product";
         let searchQuery = "";
         let recentSearches = JSON.parse(localStorage.getItem('brocart_recent_searches')) || ["Headphones", "Hoodie", "Sneakers"];
-        let activeFullscreenImages = [];
-        let currentFullscreenIndex = 0;
 
         const productGrid = document.getElementById('product-grid');
         const overlay = document.getElementById('overlay');
@@ -518,12 +512,9 @@
         const closeDetailsBtn = document.getElementById('close-details');
         const detailsContent = document.getElementById('details-content');
 
-        const fullscreenModal = document.getElementById('fullscreen-modal');
-        const closeFullscreenBtn = document.getElementById('close-fullscreen');
-        const fullscreenImg = document.getElementById('fullscreen-img');
-        const prevImageBtn = document.getElementById('prev-image');
-        const nextImageBtn = document.getElementById('next-image');
-        const imageCounter = document.getElementById('image-counter');
+        const zoomModal = document.getElementById('zoom-modal');
+        const closeZoomBtn = document.getElementById('close-zoom');
+        const zoomedImageElement = document.getElementById('zoomed-image-element');
 
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toast-msg');
@@ -671,7 +662,7 @@
                             </div>
                         </div>
                         <div class="p-3 sm:p-4 pt-0">
-                            <button onclick="addToCart(${product.id})" class="w-full bg-gray-900 text-white font-medium text-xs sm:text-sm py-2 rounded-lg hover:bg-indigo-600 active:scale-[0.98] animate-pop transition-all duration-200">Add to Cart</button>
+                            <button onclick="addToCart(${product.id})" class="w-full bg-gray-900 text-white font-medium text-xs sm:text-sm py-2.5 rounded-lg hover:bg-indigo-600 active:scale-[0.98] animate-pop transition-all duration-200">Add to Cart</button>
                         </div>
                     </div>
                 `;
@@ -682,7 +673,6 @@
             btn.addEventListener('click', () => setCategory(btn.getAttribute('data-category')));
         });
 
-        // Exact Myntra-style Preview State & Handlers inside Details Modal
         let activeGalleryImages = [];
         let activeGalleryIndex = 0;
 
@@ -702,11 +692,14 @@
             const currentImg = activeGalleryImages[activeGalleryIndex];
 
             detailsContent.innerHTML = `
-                <!-- Main Image Preview Container with Arrow Controls & Rating Badge -->
                 <div class="relative w-full aspect-[4/5] sm:aspect-[4/3] rounded-2xl overflow-hidden shadow-md bg-gray-900 group">
-                    <img id="main-preview-img" src="${currentImg}" alt="${product.name}" class="w-full h-full object-cover cursor-pointer" onclick="openFullscreenView('${currentImg}', ${activeGalleryIndex}, ${JSON.stringify(activeGalleryImages)})">
+                    <img id="main-preview-img" src="${currentImg}" alt="${product.name}" class="w-full h-full object-cover zoomable-preview" onclick="openZoomModal(this.src)" title="Click to zoom image">
                     
-                    <!-- Rating Badge Overlay (Exact Match to Image Reference) -->
+                    <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-semibold text-white pointer-events-none flex items-center space-x-1.5">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        <span>Click image to zoom</span>
+                    </div>
+
                     <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg flex items-center space-x-1.5 text-xs font-bold text-gray-900">
                         <span>${product.rating}</span>
                         <i class="fa-solid fa-star text-emerald-600 text-[11px]"></i>
@@ -714,7 +707,6 @@
                         <span class="text-gray-600 font-semibold">${product.ratingCount}</span>
                     </div>
 
-                    <!-- Left / Right Navigation Arrows -->
                     ${activeGalleryImages.length > 1 ? `
                         <button onclick="switchPreviewImage(-1, ${product.id})" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all">
                             <i class="fa-solid fa-chevron-left text-xs"></i>
@@ -725,7 +717,6 @@
                     ` : ''}
                 </div>
 
-                <!-- Thumbnail Strip Bar (Exact Match to Reference App) -->
                 ${activeGalleryImages.length > 1 ? `
                     <div class="flex space-x-3 overflow-x-auto no-scrollbar py-2">
                         ${activeGalleryImages.map((img, idx) => `
@@ -736,7 +727,6 @@
                     </div>
                 ` : ''}
 
-                <!-- Product Info & Details -->
                 <div class="space-y-4 pt-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">${product.category}</span>
@@ -777,28 +767,19 @@
 
         closeDetailsBtn.addEventListener('click', closeDetails);
 
-        function openFullscreenView(imgSrc, index, imagesArray) {
-            activeFullscreenImages = imagesArray;
-            currentFullscreenIndex = index;
-            fullscreenImg.src = imgSrc;
-            imageCounter.textContent = `${currentFullscreenIndex + 1} / ${activeFullscreenImages.length}`;
-            fullscreenModal.classList.remove('hidden');
+        function openZoomModal(imgSrc) {
+            zoomedImageElement.src = imgSrc;
+            zoomModal.classList.remove('hidden');
         }
 
-        closeFullscreenBtn.addEventListener('click', () => {
-            fullscreenModal.classList.add('hidden');
+        closeZoomBtn.addEventListener('click', () => {
+            zoomModal.classList.add('hidden');
         });
 
-        prevImageBtn.addEventListener('click', () => {
-            currentFullscreenIndex = (currentFullscreenIndex - 1 + activeFullscreenImages.length) % activeFullscreenImages.length;
-            fullscreenImg.src = activeFullscreenImages[currentFullscreenIndex];
-            imageCounter.textContent = `${currentFullscreenIndex + 1} / ${activeFullscreenImages.length}`;
-        });
-
-        nextImageBtn.addEventListener('click', () => {
-            currentFullscreenIndex = (currentFullscreenIndex + 1) % activeFullscreenImages.length;
-            fullscreenImg.src = activeFullscreenImages[currentFullscreenIndex];
-            imageCounter.textContent = `${currentFullscreenIndex + 1} / ${activeFullscreenImages.length}`;
+        zoomModal.addEventListener('click', (e) => {
+            if (e.target === zoomModal) {
+                zoomModal.classList.add('hidden');
+            }
         });
 
         function toggleWishlist(productId) {
@@ -930,7 +911,7 @@
         }
 
         function checkCloseOverlay() {
-            if (cartModal.classList.contains('hidden') && wishlistModal.classList.contains('hidden') && detailsModal.classList.contains('hidden') && fullscreenModal.classList.contains('hidden') && shippingModal.classList.contains('hidden')) {
+            if (cartModal.classList.contains('hidden') && wishlistModal.classList.contains('hidden') && detailsModal.classList.contains('hidden') && zoomModal.classList.contains('hidden') && shippingModal.classList.contains('hidden')) {
                 overlay.classList.add('opacity-0', 'pointer-events-none');
             }
         }
@@ -964,8 +945,8 @@
             closeCartModal();
             closeWishlistModal();
             closeDetails();
+            zoomModal.classList.add('hidden');
             shippingModal.classList.add('hidden');
-            fullscreenModal.classList.add('hidden');
             overlay.classList.add('opacity-0', 'pointer-events-none');
         });
 
@@ -991,13 +972,9 @@
         submitOrderBtn.addEventListener('click', () => {
             const fullName = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
-            const address = document.getElementById('cust-address').value.trim();
-            const city = document.getElementById('cust-city').value.trim();
-            const district = document.getElementById('cust-district').value.trim();
-            const state = document.getElementById('cust-state').value.trim();
-            const pin = document.getElementById('cust-pin').value.trim();
+            const fullAddress = document.getElementById('cust-address-full').value.trim();
 
-            if (!fullName || !phone || !address || !city || !district || !state || !pin) {
+            if (!fullName || !phone || !fullAddress) {
                 showToast("Please fill in all shipping details!");
                 orderForm.reportValidity();
                 return;
@@ -1007,11 +984,10 @@
             let itemsText = selectedCartItems.map(item => `- ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString('en-IN')}`).join('\n');
             const totalPrice = selectedCartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-            let message = `🛍️ *NEW ORDER PLACED - BroCart* 🛍️\n\n*Customer Details:*\n• Name: ${fullName}\n• Phone: ${phone}\n• Address: ${address}, ${city}, ${district}, ${state} - ${pin}\n\n*Selected Order Items:*\n${itemsText}\n\n*Total Amount:* ₹${totalPrice.toLocaleString('en-IN')}`;
+            let message = `🛍️ *NEW ORDER PLACED - BroCart* 🛍️\n\n*Customer Details:*\n• Name: ${fullName}\n• Phone: ${phone}\n• Address: ${fullAddress}\n\n*Selected Order Items:*\n${itemsText}\n\n*Total Amount:* ₹${totalPrice.toLocaleString('en-IN')}`;
             window.open(`https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
         });
 
-        // Initialize display safely
         renderMobilePills();
         renderProducts();
     </script>
